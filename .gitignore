@@ -1,0 +1,8 @@
+# OS X
+.DS_Store
+.DS_Store?
+._*
+
+# Packages
+web/node_modules/*
+server/node_modules/*

@@ -1,0 +1,7 @@
+<h2>Trade History</h2>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let trade of trades">
+      {{ trade.Date | date }}: {{ trade.Quantity }} shares of {{ trade.StockSymbol }} {{ trade.Transaction }} for {{ trade.Price | currency }}
+    </li>
+</ul>

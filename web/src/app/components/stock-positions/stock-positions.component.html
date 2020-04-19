@@ -1,0 +1,24 @@
+<h2>Stock Positions</h2>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Stock</th>
+            <th>Quantity</th>
+            <th>Purchase Price</th>
+            <th>Current Price</th>
+            <th>Balance</th>
+            <th>Profit/Loss</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let stockPosition of stockPositions">
+            <td>{{ stockPosition.StockSymbol }}</td>
+            <td>{{ stockPosition.Quantity }}</td>
+            <td>{{ stockPosition.PurchasePrice | currency }}</td>
+            <td>{{ stockPosition.CurrentPrice | currency }}</td>
+            <td>{{ stockPosition.Balance | currency }}</td>
+            <td class="{{ stockPosition.ProfitLossCssClass }}">{{ stockPosition.ProfitLoss | currency }}</td>
+        </tr>
+    </tbody>
+</table>
