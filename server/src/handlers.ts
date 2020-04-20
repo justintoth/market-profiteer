@@ -4,18 +4,58 @@ import fs from 'fs';
 
 const jsonFilePath: string = 'trades.json';
 
-export const rootHandler = (_req: Request, res: Response) => {
+export const root = (_req: Request, res: Response) => {
   return res.send('API is working 🤓');
 };
 
-export const getAllStocksHandler = (req: Request, res: Response) => {
+let attempts = 0;
+
+export const getAllTrades = (req: Request, res: Response) => {
   // Retrieve trades from JSON file.
   let trades:Trade[] = [];
   let json = fs.readFileSync(jsonFilePath, 'utf-8');
   trades = JSON.parse(json);
 
+  console.log(`Retrieved ${trades.length} trades...`);
+
+  return res.json(trades);
+};
+
+export const saveTrade = (req: Request, res: Response) => {
+  // Validate...
+  if (!req.body) {
+    console.warn('Can\'t save trade, no request body sent...');
+    return res.sendStatus(400);
+  }
+
+  // Retrieve trades from JSON file.
+  let trades:Trade[] = [];
+  let json = fs.readFileSync(jsonFilePath, 'utf-8');
+  trades = JSON.parse(json);
+
+  // Prepend new trade.
+  let trade:Trade = new Trade();
+  trade.Date = req.body.Date;
+  trade.StockSymbol = req.body.StockSymbol;
+  trade.IsPurchase = req.body.IsPurchase || false;
+  trade.Quantity = req.body.Quantity;
+  trade.Price = req.body.Price;
+  trades.unshift(trade);
+
+  // Save trade to JSON file.
+  json = JSON.stringify(trades, null, 2);
+  fs.writeFileSync(jsonFilePath, json);
+
+  console.log('Saved trade: ' + JSON.stringify(trade));
+
+  res.json(trade);
+};
+
+export const saveDummyTrades = (req: Request, res: Response) => {
   // Sample trades...
-  /*let trade:Trade = new Trade();
+  let trades:Trade[] = [];
+
+  let trade:Trade = new Trade();
   trade.Date = new Date('12/1/2019');
   trade.StockSymbol = 'SPY';
   trade.IsPurchase = true;
@@ -144,26 +184,7 @@ export const getAllStocksHandler = (req: Request, res: Response) => {
   trades.push(trade);
 
   let json = JSON.stringify(trades);
-  fs.writeFileSync(jsonFilePath, json);*/
-
-  console.log('Trades: ' + trades.length);
-
-  return res.json(trades);
-};
-
-export const saveStockHandler = (req: Request, res: Response) => {
-  // Retrieve trades from JSON file.
-  let trades:Trade[] = [];
-  let json = fs.readFileSync(jsonFilePath, 'utf-8');
-  trades = JSON.parse(json);
-
-  // TODO: Append new trade.
-
-  // Save trade to JSON file.
-  json = JSON.stringify(trades);
   fs.writeFileSync(jsonFilePath, json);
-
-  console.log('Trades after save: ' + trades.length);
 
   return res.json(trades);
 };

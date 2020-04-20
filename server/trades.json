@@ -1,1 +1,198 @@
-[{"Date":"2019-12-01T05:00:00.000Z","StockSymbol":"SPY","IsPurchase":true,"Quantity":34,"Price":286.56},{"Date":"2019-12-01T05:00:00.000Z","StockSymbol":"VTV","IsPurchase":true,"Quantity":70,"Price":92.29},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"DIS","IsPurchase":true,"Quantity":34,"Price":148.24},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"PTON","IsPurchase":true,"Quantity":155,"Price":32.43},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"GOOGL","IsPurchase":true,"Quantity":3,"Price":1},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"W","IsPurchase":true,"Quantity":60,"Price":83.61},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"AMZN","IsPurchase":true,"Quantity":3,"Price":1},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"SPY","IsPurchase":true,"Quantity":18,"Price":319.69},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"SPY","IsPurchase":false,"Quantity":16,"Price":319.92},{"Date":"2019-12-17T05:00:00.000Z","StockSymbol":"SKX","IsPurchase":true,"Quantity":125,"Price":41.5},{"Date":"2020-01-21T05:00:00.000Z","StockSymbol":"PTON","IsPurchase":false,"Quantity":155,"Price":33.04},{"Date":"2020-01-21T05:00:00.000Z","StockSymbol":"SKX","IsPurchase":true,"Quantity":130,"Price":40.98},{"Date":"2020-02-05T05:00:00.000Z","StockSymbol":"DIS","IsPurchase":true,"Quantity":43,"Price":141.06},{"Date":"2020-02-06T05:00:00.000Z","StockSymbol":"W","IsPurchase":false,"Quantity":40,"Price":102.52},{"Date":"2020-02-06T05:00:00.000Z","StockSymbol":"NKE","IsPurchase":true,"Quantity":20,"Price":100.58},{"Date":"2020-02-06T05:00:00.000Z","StockSymbol":"SKX","IsPurchase":true,"Quantity":55,"Price":37.89}]
+[
+  {
+    "Date": "2020-02-27",
+    "StockSymbol": "NKE",
+    "IsPurchase": false,
+    "Quantity": 8,
+    "Price": 89.44
+  },
+  {
+    "Date": "2020-02-27",
+    "StockSymbol": "GOOGL",
+    "IsPurchase": false,
+    "Quantity": 2,
+    "Price": 1354.87
+  },
+  {
+    "Date": "2020-02-27",
+    "StockSymbol": "VTV",
+    "IsPurchase": false,
+    "Quantity": 60,
+    "Price": 106
+  },
+  {
+    "Date": "2020-02-27",
+    "StockSymbol": "DIS",
+    "IsPurchase": true,
+    "Quantity": 47,
+    "Price": 127.76
+  },
+  {
+    "Date": "2020-02-13",
+    "StockSymbol": "W",
+    "IsPurchase": true,
+    "Quantity": 58,
+    "Price": 86.95
+  },
+  {
+    "Date": "2020-02-13",
+    "StockSymbol": "SPY",
+    "IsPurchase": false,
+    "Quantity": 15,
+    "Price": 337.23
+  },
+  {
+    "Date": "2020-02-10",
+    "StockSymbol": "SKX",
+    "IsPurchase": true,
+    "Quantity": 165,
+    "Price": 38.34
+  },
+  {
+    "Date": "2020-02-10",
+    "StockSymbol": "SPY",
+    "IsPurchase": true,
+    "Quantity": 6,
+    "Price": 333.31
+  },
+  {
+    "Date": "2020-02-10",
+    "StockSymbol": "AMZN",
+    "IsPurchase": false,
+    "Quantity": 2,
+    "Price": 2118.41
+  },
+  {
+    "Date": "2020-02-07",
+    "StockSymbol": "DIS",
+    "IsPurchase": true,
+    "Quantity": 35,
+    "Price": 140.59
+  },
+  {
+    "Date": "2020-02-07",
+    "StockSymbol": "AAPL",
+    "IsPurchase": true,
+    "Quantity": 6,
+    "Price": 322.78
+  },
+  {
+    "Date": "2020-02-07",
+    "StockSymbol": "SKX",
+    "IsPurchase": false,
+    "Quantity": 167,
+    "Price": 41.69
+  },
+  {
+    "Date": "2020-02-06T05:00:00.000Z",
+    "StockSymbol": "SKX",
+    "IsPurchase": true,
+    "Quantity": 55,
+    "Price": 37.89
+  },
+  {
+    "Date": "2020-02-06T05:00:00.000Z",
+    "StockSymbol": "NKE",
+    "IsPurchase": true,
+    "Quantity": 20,
+    "Price": 100.58
+  },
+  {
+    "Date": "2020-02-06T05:00:00.000Z",
+    "StockSymbol": "W",
+    "IsPurchase": false,
+    "Quantity": 40,
+    "Price": 102.52
+  },
+  {
+    "Date": "2020-02-05T05:00:00.000Z",
+    "StockSymbol": "DIS",
+    "IsPurchase": true,
+    "Quantity": 43,
+    "Price": 141.06
+  },
+  {
+    "Date": "2020-01-21T05:00:00.000Z",
+    "StockSymbol": "SKX",
+    "IsPurchase": true,
+    "Quantity": 130,
+    "Price": 40.98
+  },
+  {
+    "Date": "2020-01-21T05:00:00.000Z",
+    "StockSymbol": "PTON",
+    "IsPurchase": false,
+    "Quantity": 155,
+    "Price": 33.04
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "SKX",
+    "IsPurchase": true,
+    "Quantity": 125,
+    "Price": 41.5
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "SPY",
+    "IsPurchase": false,
+    "Quantity": 16,
+    "Price": 319.92
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "SPY",
+    "IsPurchase": true,
+    "Quantity": 18,
+    "Price": 319.69
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "AMZN",
+    "IsPurchase": true,
+    "Quantity": 3,
+    "Price": 1
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "W",
+    "IsPurchase": true,
+    "Quantity": 60,
+    "Price": 83.61
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "GOOGL",
+    "IsPurchase": true,
+    "Quantity": 3,
+    "Price": 1
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "PTON",
+    "IsPurchase": true,
+    "Quantity": 155,
+    "Price": 32.43
+  },
+  {
+    "Date": "2019-12-17T05:00:00.000Z",
+    "StockSymbol": "DIS",
+    "IsPurchase": true,
+    "Quantity": 34,
+    "Price": 148.24
+  },
+  {
+    "Date": "2019-12-01T05:00:00.000Z",
+    "StockSymbol": "VTV",
+    "IsPurchase": true,
+    "Quantity": 70,
+    "Price": 92.29
+  },
+  {
+    "Date": "2019-12-01T05:00:00.000Z",
+    "StockSymbol": "SPY",
+    "IsPurchase": true,
+    "Quantity": 34,
+    "Price": 286.56
+  }
+]

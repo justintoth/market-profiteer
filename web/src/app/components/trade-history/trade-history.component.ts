@@ -15,9 +15,13 @@ export class TradeHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tradeService.getAll().subscribe(function(result: Trade[]) {
-      this.trades = result;
-    }.bind(this));
-  }
+      // Listen for updates to trades.
+      this.tradeService.TradesSubject.subscribe((result) => {
+        this.trades = result;
+      });
+
+      // Get all trades.
+      this.tradeService.getAll();
+    }
 
 }
