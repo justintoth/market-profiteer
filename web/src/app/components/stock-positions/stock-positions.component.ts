@@ -17,7 +17,7 @@ export class StockPositionsComponent implements OnInit {
 
   ngOnInit(): void {
     // Listen for updates to trades.
-    this.tradeService.TradesSubject.subscribe((trades) => {
+    this.tradeService.tradesSubscription.subscribe((trades) => {
       // Get all stock positions.
       this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
         this.stockPositions = stockPositions;

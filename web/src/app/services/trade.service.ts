@@ -9,15 +9,15 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class TradeService {
 
   private apiUrl:string = 'http://localhost:8000';
-  public TradesSubject:BehaviorSubject<Trade[]> = new BehaviorSubject<Trade[]>([]);
+  private tradesSubject:BehaviorSubject<Trade[]> = new BehaviorSubject<Trade[]>([]);
+  private tradesProfitLossSubject:BehaviorSubject<Trade[]> = new BehaviorSubject<Trade[]>([]);
 
   constructor(private http: HttpClient) { }
 
   public getAll(): Observable<Trade[]> {
-    console.log('Retrieving trades...');
     let observable = this.http.get<Trade[]>(`${this.apiUrl}/trades`);
     observable.subscribe((result) => {
-      this.TradesSubject.next(result);
+      this.tradesSubject.next(result);
       console.log(`Retrieved ${result.length} trades...`);
     });
     return observable;
@@ -28,11 +28,19 @@ export class TradeService {
     let observable = this.http.post<Trade>(`${this.apiUrl}/trades`, trade);
     observable.subscribe((result) => {
       console.log('Saved the trade!');
-      var trades = this.TradesSubject.value;
+      var trades = this.tradesSubject.value;
       trades.unshift(result);
-      this.TradesSubject.next(trades);
+      this.tradesSubject.next(trades);
     });
     return observable;
+  }
+
+  public get tradesSubscription(): BehaviorSubject<Trade[]> {
+    return this.tradesSubject;
+  }
+
+  public get tradesProfitLossSubscription(): BehaviorSubject<Trade[]> {
+    return this.tradesProfitLossSubject;
   }
 
 }

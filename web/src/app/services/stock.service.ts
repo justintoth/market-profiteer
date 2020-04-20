@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { StockPrices } from '../models/stock-prices';
 import { Observable, of } from 'rxjs';
 import { StockPrice } from '../models/stock-price';
+import { TradeService } from './trade.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class StockService {
   private stockPriceRefreshDate: Moment;
   private stockPrices: StockPrices;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private tradeService: TradeService) { 
   }
 
   public getAllPositions(trades: Trade[]): Observable<StockPosition[]> {
@@ -39,9 +40,10 @@ export class StockService {
               stockPosition.CurrentPrice = stockPrice.price;
               stockPositions.push(stockPosition);
             } else {
-              // Stock sold, reduce quantity of existing stock position(s) and calculate sale profit.
+              // Stock sold, reduce quantity of existing stock position(s) and calculate sale profit or loss.
               let stockPositionsBySymbol:StockPosition[] = stockPositions.filter(sp => sp.StockSymbol === trade.StockSymbol);
               trade.CurrentQuantity = trade.Quantity;
+              trade.SaleProfitLoss = 0;
               stockPositionsBySymbol.forEach(function(stockPosition: StockPosition) { 
                 if (trade.CurrentQuantity > 0) {
                   var quantity = Math.min(trade.CurrentQuantity, stockPosition.Quantity);
@@ -53,14 +55,19 @@ export class StockService {
             }
           });
 
+          // Refresh trades, now that we have calculated sale profit or loss.
+          this.tradeService.tradesProfitLossSubscription.next(trades);
+
           // Remove stock positions that were fully sold.
           stockPositions = stockPositions.filter(sp => sp.Quantity > 0);
 
           // TODO: Group by stock symbol, then sort by balance descending.
 
-          console.log('Stock Positions: ' + stockPositions.length);
-          observer.next(stockPositions);
-          observer.complete();
+          if (stockPositions.length > 0) {
+            console.log(`Calculated ${stockPositions.length} stock positions...`);
+            observer.next(stockPositions);
+            observer.complete();
+          }
         });
     });
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Trade } from 'src/app/models/trade.model';
 import { TradeService } from 'src/app/services/trade.service';
 
@@ -10,12 +10,13 @@ import { TradeService } from 'src/app/services/trade.service';
 export class TradeFormComponent implements OnInit {
 
   model: Trade = new Trade();
+  @ViewChild("date") dateField: ElementRef;
 
   constructor(private tradeService: TradeService) { }
 
   ngOnInit(): void {
     // Listen for updates to trades.
-    this.tradeService.TradesSubject.subscribe((result) => {
+    this.tradeService.tradesSubscription.subscribe((result) => {
       // Reset form.
       //this.model.Date = new Date();
       this.model.StockSymbol = null;
@@ -24,6 +25,9 @@ export class TradeFormComponent implements OnInit {
       this.model.Quantity = null;
       // TODO: Show alert that form was saved.
     });
+
+    // Set focus.
+    setTimeout(() => this.dateField.nativeElement.focus(), 0);
   }
 
   onSubmit() {

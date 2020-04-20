@@ -8,11 +8,8 @@ export class Trade {
     public CurrentQuantity?:number;
     public SaleProfitLoss?:number;
 
-    public get Transaction():string {
-        return this.IsPurchase ? 'purchased' : 'sold';
+    // TODO: Computed properties aren't working in this model!
+    public get SaleProfitLossCssClass():string {
+        return this.SaleProfitLoss >= 0 ? "green" : "red";
     }
-
-    /*public toString = (): string => {
-        return `${Date | date}: {{ trade.Quantity }} shares of {{ trade.StockSymbol }} {{ trade.Transaction }} for {{ trade.Price | currency }}`;
-    }*/
 }

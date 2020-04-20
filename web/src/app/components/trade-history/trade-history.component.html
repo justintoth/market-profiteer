@@ -2,6 +2,10 @@
 
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let trade of trades">
-      {{ trade.Date | date }}: {{ trade.Quantity }} shares of {{ trade.StockSymbol }} {{ trade.Transaction }} for {{ trade.Price | currency }}
+      {{ trade.Date | date }}: 
+      {{ trade.Quantity }} shares of {{ trade.StockSymbol }} {{ trade.IsPurchase ? 'purchased' : 'sold' }} for {{ trade.Price | currency }}.
+      <div *ngIf="!trade.IsPurchase" class="{{ trade.SaleProfitLoss >= 0 ? 'green' : 'red' }}">
+        {{ trade.SaleProfitLoss >= 0 ? 'Profit: ' : 'Loss: ' }} {{ trade.SaleProfitLoss | currency }}
+      </div>
     </li>
 </ul>

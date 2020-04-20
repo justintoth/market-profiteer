@@ -18,8 +18,6 @@ Add Trade Form > Set default date
 Add Trade Form > After inputting Stock Symbol, auto-populate current Price
 Trade Form > After saving, give visual cue that save was successful
 
-Trade History List > Doesn't show purchased or sold
-Trade History List > Doesn't show profit/loss on sold
 Trade History List & Trade Form > Be able to Edit trades
 
 Stock Positions > Group by Stock Symbol, sort by largest grouped Balance
