@@ -13,9 +13,5 @@ Read the README.md file in the `web` folder for more information on getting set 
 ## TODO's
 
 Trade Form > After saving, give visual cue that save was successful
-
-Trade History List & Trade Form > Be able to Edit trades
-
+Trade History List & Trade Form > Be able to Edit & Delete trades
 Stock Positions > Auto-refresh current Prices on interval
-
-Stock Symbols should be links

@@ -22,7 +22,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let stockPosition of stockPositions">
-            <td>{{ stockPosition.StockSymbol }}</td>
+            <td><a href="https://www.google.com/search?q={{ stockPosition.StockSymbol }}&tbm=fin" target="_blank">{{ stockPosition.StockSymbol }}</a></td>
             <td>{{ stockPosition.Quantity }}</td>
             <td>{{ stockPosition.PurchasePrice | currency }}</td>
             <td>{{ stockPosition.CurrentPrice | currency }}</td>
