@@ -11,6 +11,9 @@ import { TradeService } from 'src/app/services/trade.service';
 export class StockPositionsComponent implements OnInit {
 
   public stockPositions: StockPosition[] = [];
+  public tradesProfit:number = 0;
+  public stockPositionsProfit:number = 0;
+  public totalProfit:number = 0;
 
   constructor(private tradeService: TradeService, private stockService: StockService) {
    }
@@ -19,8 +22,16 @@ export class StockPositionsComponent implements OnInit {
     // Listen for updates to trades.
     this.tradeService.tradesSubscription.subscribe((trades) => {
       // Get all stock positions.
-      this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
+      const subscription = this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
         this.stockPositions = stockPositions;
+        // Update summary.
+        this.tradesProfit = trades
+          .filter(x => !x.IsPurchase)
+          .reduce((sum, current) => sum + (current.SaleProfitLoss || 0), 0);
+        this.stockPositionsProfit = stockPositions
+          .reduce((sum, current) => sum + current.ProfitLoss, 0);
+        this.totalProfit = this.tradesProfit + this.stockPositionsProfit;
+        //subscription.unsubscribe();
       });
     });
     

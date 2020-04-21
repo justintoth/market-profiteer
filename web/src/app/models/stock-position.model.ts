@@ -5,7 +5,7 @@ export class StockPosition {
     public CurrentPrice:number;
 
     public get Balance():number {
-        return (this.Quantity * this.CurrentPrice);
+        return this.Quantity * this.CurrentPrice;
     }
 
     public get ProfitLoss():number {

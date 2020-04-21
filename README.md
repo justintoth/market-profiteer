@@ -19,5 +19,4 @@ Trade History List & Trade Form > Be able to Edit trades
 
 Stock Positions > Auto-refresh current Prices on interval
 
-Summary > Create new view showing Trades Profit/Loss, Positions Profit/Loss, and Total Profit/Loss
 Stock Symbols should be links

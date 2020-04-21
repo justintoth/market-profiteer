@@ -35,7 +35,10 @@ export class TradeFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.tradeService.save(this.model);
+    const subscription = this.tradeService.save(this.model)
+      .subscribe(result => {
+        subscription.unsubscribe();
+      });
     this.formIsVisible = false;
   }
 

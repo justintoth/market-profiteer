@@ -121,7 +121,7 @@
   {
     "Date": "2020-02-10",
     "StockSymbol": "SPY",
-    "IsPurchase": true,
+    "IsPurchase": false,
     "Quantity": 6,
     "Price": 333.31
   },
@@ -221,7 +221,7 @@
     "StockSymbol": "AMZN",
     "IsPurchase": true,
     "Quantity": 3,
-    "Price": 1
+    "Price": 1783.31
   },
   {
     "Date": "2019-12-17T05:00:00.000Z",
@@ -235,7 +235,7 @@
     "StockSymbol": "GOOGL",
     "IsPurchase": true,
     "Quantity": 3,
-    "Price": 1
+    "Price": 1354.08
   },
   {
     "Date": "2019-12-17T05:00:00.000Z",

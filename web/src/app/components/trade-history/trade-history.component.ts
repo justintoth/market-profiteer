@@ -24,7 +24,10 @@ export class TradeHistoryComponent implements OnInit {
       });
 
       // Get all trades.
-      this.tradeService.getAll();
+      const subscription = this.tradeService.getAll()
+        .subscribe(result => {
+          subscription.unsubscribe();
+        });
     }
 
 }

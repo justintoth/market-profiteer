@@ -8,6 +8,7 @@ import { StockPrices } from '../models/stock-prices';
 import { Observable, of } from 'rxjs';
 import { StockPrice } from '../models/stock-price';
 import { TradeService } from './trade.service';
+import { mergeMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,10 @@ export class StockService {
   }
 
   public getAllPositions(trades: Trade[]): Observable<StockPosition[]> {
-    return Observable.create(observer => {
-      this.getAllPrices()
-        .subscribe((stockPrices) => {
+    // Get stock prices.
+    return this.getAllPrices()
+      .pipe(
+        mergeMap (stockPrices => {
           let stockPositions: StockPosition[] = [];
 
           trades.slice().reverse().forEach(function(trade: Trade) {
@@ -72,42 +74,41 @@ export class StockService {
             else if (sp1.Balance > sp2.Balance)
                 return -1
             return 0;
-        });
+          });
 
-          if (stockPositions.length > 0) {
+          if (stockPositions.length > 0)
             console.log(`Calculated ${stockPositions.length} stock positions...`);
-            observer.next(stockPositions);
-            observer.complete();
-          }
-        });
-    });
+          return of(stockPositions);
+        })
+      );
   }
 
   public getAllPrices(): Observable<StockPrices> {
     let minutesSinceLastRefresh: number =  this.stockPriceRefreshDate ? 
       moment.duration(moment().diff(this.stockPriceRefreshDate)).minutes() : 100;
     if (minutesSinceLastRefresh > 1) {
-      let observable = this.http.get<StockPrices>(this.stockPriceApiUrl);
-      observable.subscribe((result) => {
-        this.stockPrices = result;
-        this.stockPriceRefreshDate = moment();
-        console.log(`Retrieved ${result.symbolsList.length} stock prices...`);
-      });
-      return observable;
+      return this.http.get<StockPrices>(this.stockPriceApiUrl)
+        .pipe(
+          tap(result => {
+            this.stockPrices = result;
+            result.symbolsList.forEach(x => x.price = Math.round(x.price * 100) / 100);
+            this.stockPriceRefreshDate = moment();
+            console.log(`Retrieved ${result.symbolsList.length} stock prices...`);
+          })
+        );
     } else {
       return of(this.stockPrices);
     }
   }
 
   public getPrice(stockSymbol: string): Observable<StockPrice> {
-    return Observable.create(observer => {
-      this.getAllPrices()
-        .subscribe((result) => {
+    return this.getAllPrices()
+      .pipe(
+        mergeMap(result => {
           let stockPrice = result.symbolsList.find(function(x) { return x.symbol === stockSymbol; });
-          observer.next(stockPrice);
-          observer.complete();
-        });
-    });
+          return of(stockPrice);
+        })
+      );
   }
 
 }
