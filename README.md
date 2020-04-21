@@ -12,7 +12,6 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
-Add Trade Form > After inputting Stock Symbol, auto-populate current Price
 Trade Form > After saving, give visual cue that save was successful
 
 Trade History List & Trade Form > Be able to Edit trades

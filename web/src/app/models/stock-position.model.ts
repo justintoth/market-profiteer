@@ -11,8 +11,4 @@ export class StockPosition {
     public get ProfitLoss():number {
         return (this.CurrentPrice - this.PurchasePrice) * this.Quantity;
     }
-
-    public get ProfitLossCssClass():string {
-        return this.ProfitLoss >= 0 ? "green" : "red";
-    }
 }

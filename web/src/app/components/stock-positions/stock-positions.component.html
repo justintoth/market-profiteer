@@ -27,7 +27,7 @@
             <td>{{ stockPosition.PurchasePrice | currency }}</td>
             <td>{{ stockPosition.CurrentPrice | currency }}</td>
             <td>{{ stockPosition.Balance | currency }}</td>
-            <td class="{{ stockPosition.ProfitLossCssClass }}">{{ stockPosition.ProfitLoss | currency }}</td>
+            <td class="{{ stockPosition.ProfitLoss >= 0 ? 'green' : 'red' }}">{{ stockPosition.ProfitLoss | currency }}</td>
         </tr>
     </tbody>
 </table>

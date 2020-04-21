@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Trade } from 'src/app/models/trade.model';
 import { TradeService } from 'src/app/services/trade.service';
+import { StockService } from 'src/app/services/stock.service';
 
 @Component({
   selector: 'app-trade-form',
@@ -13,7 +14,7 @@ export class TradeFormComponent implements OnInit {
   model: Trade = new Trade();
   @ViewChild("stockSymbol") stockSymbolField: ElementRef;
 
-  constructor(private tradeService: TradeService) { }
+  constructor(private tradeService: TradeService, private stockService: StockService) { }
 
   ngOnInit(): void {
     // Listen for updates to trades.
@@ -32,6 +33,18 @@ export class TradeFormComponent implements OnInit {
     this.formIsVisible = true;
     // Set focus.
     setTimeout(() => { this.stockSymbolField.nativeElement.focus(); });
+  }
+
+  stockSymbolChanged() {
+    if (this.model.Price)
+      return;
+    // If no price inputted, populate it from stock.
+    const subscription = this.stockService.getPrice(this.model.StockSymbol)
+      .subscribe(result => {
+        if (result)
+          this.model.Price = result.price;
+        //subscription.unsubscribe();
+      });
   }
 
   onSubmit() {
