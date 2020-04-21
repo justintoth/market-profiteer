@@ -61,7 +61,18 @@ export class StockService {
           // Remove stock positions that were fully sold.
           stockPositions = stockPositions.filter(sp => sp.Quantity > 0);
 
-          // TODO: Group by stock symbol, then sort by balance descending.
+          // Sort by stock symbol.
+          stockPositions = stockPositions.sort((sp1,sp2) => {
+            if (sp1.StockSymbol > sp2.StockSymbol)
+                return 1;
+            else if (sp1.StockSymbol < sp2.StockSymbol)
+                return -1;
+            else if (sp1.Balance < sp2.Balance) 
+                return 1;
+            else if (sp1.Balance > sp2.Balance)
+                return -1
+            return 0;
+        });
 
           if (stockPositions.length > 0) {
             console.log(`Calculated ${stockPositions.length} stock positions...`);

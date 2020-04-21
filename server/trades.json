@@ -1,5 +1,75 @@
 [
   {
+    "Date": "2020-04-14T04:00:00.000Z",
+    "StockSymbol": "CCL",
+    "IsPurchase": true,
+    "Quantity": 178,
+    "Price": 12.46
+  },
+  {
+    "Date": "2020-04-14T04:00:00.000Z",
+    "StockSymbol": "HLT",
+    "IsPurchase": true,
+    "Quantity": 71,
+    "Price": 69.96
+  },
+  {
+    "Date": "2020-04-14T04:00:00.000Z",
+    "StockSymbol": "MAR",
+    "IsPurchase": true,
+    "Quantity": 61,
+    "Price": 81.36
+  },
+  {
+    "Date": "2020-04-14T04:00:00.000Z",
+    "StockSymbol": "LUV",
+    "IsPurchase": true,
+    "Quantity": 142,
+    "Price": 34.92
+  },
+  {
+    "Date": "2020-04-14T04:00:00.000Z",
+    "StockSymbol": "SKX",
+    "IsPurchase": true,
+    "Quantity": 189,
+    "Price": 26.44
+  },
+  {
+    "Date": "2020-04-14T04:00:00.000Z",
+    "StockSymbol": "DIS",
+    "IsPurchase": true,
+    "Quantity": 47,
+    "Price": 106.03
+  },
+  {
+    "Date": "2020-04-14T04:00:00.000Z",
+    "StockSymbol": "W",
+    "IsPurchase": false,
+    "Quantity": 315,
+    "Price": 85.86
+  },
+  {
+    "Date": "2020-02-27T05:00:00.000Z",
+    "StockSymbol": "W",
+    "IsPurchase": true,
+    "Quantity": 237,
+    "Price": 58.71
+  },
+  {
+    "Date": "2020-02-27T05:00:00.000Z",
+    "StockSymbol": "SPY",
+    "IsPurchase": false,
+    "Quantity": 11,
+    "Price": 298
+  },
+  {
+    "Date": "2020-02-27T05:00:00.000Z",
+    "StockSymbol": "AAPL",
+    "IsPurchase": false,
+    "Quantity": 3,
+    "Price": 282.37
+  },
+  {
     "Date": "2020-02-27",
     "StockSymbol": "NKE",
     "IsPurchase": false,

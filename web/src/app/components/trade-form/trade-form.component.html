@@ -1,36 +1,48 @@
-<h2>Add Trade</h2>
+<button type="button" class="btn btn-primary" [hidden]="formIsVisible" (click)="showForm()">Add Trade</button>
 
-<form #tradeForm="ngForm" (ngSubmit)="onSubmit()">
-  
-    <div class="form-group">
-        <input type="date" class="form-control" id="date" required placeholder="Date (mm/dd/yyyy)"
-            [(ngModel)]="model.Date" name="Date" #date />
-    </div>
+<div class="card" [hidden]="!formIsVisible">
+    <div class="card-body">
+      <h5 class="card-title">Add Trade</h5>
 
-    <div class="form-group">
-        <input type="text" class="form-control" id="stockSymbol" required placeholder="Stock Symbol"
-            [(ngModel)]="model.StockSymbol" name="StockSymbol" />
-    </div>
-  
-    <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="isPurchase"
-            [(ngModel)]="model.IsPurchase" name="IsPurchase" />
-        <label class="form-check-label" for="isPurchase">Is Purchase?</label>
-    </div>
+        <form #tradeForm="ngForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-        <input type="number" class="form-control" id="quantity" required min="0" placeholder="Quantity"
-            [(ngModel)]="model.Quantity" name="Quantity" />
-    </div>
+            <div class="form-group">
+                <dl-date-time-picker
+                    startView="day"
+                    maxView="year"
+                    minView="day"
+                    minuteStep="5"
+                    [(ngModel)]="model.Date"
+                    name="Date">
+                </dl-date-time-picker>
+            </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-        </div>
-        <input type="number" class="form-control" id="price" required min="0" placeholder="Price"
-            [(ngModel)]="model.Price" name="Price" />
-    </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="stockSymbol" required placeholder="Stock Symbol"
+                    [(ngModel)]="model.StockSymbol" name="StockSymbol" #stockSymbol />
+            </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!tradeForm.valid">Submit</button>
-  
-  </form>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="isPurchase"
+                    [(ngModel)]="model.IsPurchase" name="IsPurchase" />
+                <label class="form-check-label" for="isPurchase">Is Purchase?</label>
+            </div>
+
+            <div class="form-group">
+                <input type="number" class="form-control" id="quantity" required min="0" placeholder="Quantity"
+                    [(ngModel)]="model.Quantity" name="Quantity" />
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="number" class="form-control" id="price" required min="0" placeholder="Price"
+                    [(ngModel)]="model.Price" name="Price" />
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!tradeForm.valid">Submit</button>
+
+        </form>
+    </div>
+</div>

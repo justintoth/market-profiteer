@@ -12,16 +12,11 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
-Trade Form > Better date picker
-Add Trade Form > Auto-set focus to date field
-Add Trade Form > Set default date
 Add Trade Form > After inputting Stock Symbol, auto-populate current Price
 Trade Form > After saving, give visual cue that save was successful
 
 Trade History List & Trade Form > Be able to Edit trades
 
-Stock Positions > Group by Stock Symbol, sort by largest grouped Balance
-Stock Positions > Populate current Prices
 Stock Positions > Auto-refresh current Prices on interval
 
 Summary > Create new view showing Trades Profit/Loss, Positions Profit/Loss, and Total Profit/Loss

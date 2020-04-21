@@ -9,8 +9,9 @@ import { TradeService } from 'src/app/services/trade.service';
 })
 export class TradeFormComponent implements OnInit {
 
+  formIsVisible: boolean = false;
   model: Trade = new Trade();
-  @ViewChild("date") dateField: ElementRef;
+  @ViewChild("stockSymbol") stockSymbolField: ElementRef;
 
   constructor(private tradeService: TradeService) { }
 
@@ -18,20 +19,24 @@ export class TradeFormComponent implements OnInit {
     // Listen for updates to trades.
     this.tradeService.tradesSubscription.subscribe((result) => {
       // Reset form.
-      //this.model.Date = new Date();
+      this.model.Date = new Date();
       this.model.StockSymbol = null;
       this.model.IsPurchase = true;
       this.model.Price = null;
       this.model.Quantity = null;
       // TODO: Show alert that form was saved.
     });
+  }
 
+  showForm() {
+    this.formIsVisible = true;
     // Set focus.
-    setTimeout(() => this.dateField.nativeElement.focus(), 0);
+    setTimeout(() => { this.stockSymbolField.nativeElement.focus(); });
   }
 
   onSubmit() {
     this.tradeService.save(this.model);
+    this.formIsVisible = false;
   }
 
 }
