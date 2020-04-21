@@ -12,6 +12,16 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
-Trade Form > After saving, give visual cue that save was successful
-Trade History List & Trade Form > Be able to Edit & Delete trades
-Stock Positions > Auto-refresh current Prices on interval
+- Move constants (e.g. api urls) into separate module
+- Trade Form > After saving, give visual cue that save was successful
+- Trade Form > Be able to Edit & Delete trades
+- Trade History > Support paging
+- Stock Positions > Auto-refresh current Prices on interval
+
+To make this into a product...
+- Allow using for free but the data is only stored temporarily
+- Allow creating an account to persist the data
+- After a free trial expires, or to use additional features, require them to pay
+- Add google analytics
+- Perform SEO
+- Run google ads
