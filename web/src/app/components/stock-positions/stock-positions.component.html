@@ -13,9 +13,9 @@
     <thead class="thead-dark">
         <tr>
             <th>Stock</th>
-            <th>Quantity</th>
-            <th>Purchase Price</th>
-            <th>Current Price</th>
+            <th>#</th>
+            <th class="d-none d-lg-table-cell">Purchase Price</th>
+            <th class="d-none d-xl-table-cell">Current Price</th>
             <th>Balance</th>
             <th>Profit/Loss</th>
         </tr>
@@ -24,8 +24,8 @@
         <tr *ngFor="let stockPosition of stockPositions">
             <td><a href="https://www.google.com/search?q={{ stockPosition.StockSymbol }}&tbm=fin" target="_blank">{{ stockPosition.StockSymbol }}</a></td>
             <td>{{ stockPosition.Quantity }}</td>
-            <td>{{ stockPosition.PurchasePrice | currency }}</td>
-            <td>{{ stockPosition.CurrentPrice | currency }}</td>
+            <td class="d-none d-lg-table-cell">{{ stockPosition.PurchasePrice | currency }}</td>
+            <td class="d-none d-xl-table-cell">{{ stockPosition.CurrentPrice | currency }}</td>
             <td>{{ stockPosition.Balance | currency }}</td>
             <td class="{{ stockPosition.ProfitLoss >= 0 ? 'green' : 'red' }}">{{ stockPosition.ProfitLoss | currency }}</td>
         </tr>
