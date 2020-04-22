@@ -9,6 +9,7 @@ import { Observable, of } from 'rxjs';
 import { StockPrice } from '../models/stock-price';
 import { TradeService } from './trade.service';
 import { mergeMap, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ import { mergeMap, tap } from 'rxjs/operators';
 export class StockService {
 
   // TODO: Find more up to date api...
-  private stockPriceApiUrl: string = 'https://financialmodelingprep.com/api/v3/company/stock/list';
+  private stockPriceApiUrl: string = environment.stockPriceApiUrl;
   private stockPriceRefreshDate: Moment;
   private stockPrices: StockPrices;
 

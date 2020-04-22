@@ -3,13 +3,14 @@ import { Trade } from '../models/trade.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TradeService {
 
-  private apiUrl:string = 'http://localhost:8000';
+  private apiUrl:string = environment.apiUrl;
   private tradesSubject:BehaviorSubject<Trade[]> = new BehaviorSubject<Trade[]>([]);
   private tradesProfitLossSubject:BehaviorSubject<Trade[]> = new BehaviorSubject<Trade[]>([]);
 

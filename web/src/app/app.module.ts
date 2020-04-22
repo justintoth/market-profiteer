@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule }   from '@angular/forms';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { TradeHistoryComponent } from './components/trade-history/trade-history.component';
 import { StockPositionsComponent } from './components/stock-positions/stock-positions.component';
@@ -26,6 +28,8 @@ import { TradeFormComponent } from './components/trade-form/trade-form.component
     FormsModule,
     DlDateTimeDateModule,
     DlDateTimePickerModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [FormsModule],
   bootstrap: [AppComponent]

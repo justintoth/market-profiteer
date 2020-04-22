@@ -12,8 +12,6 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
-- Move constants (e.g. api urls) into separate module
-- Trade Form > After saving, give visual cue that save was successful
 - Trade Form > Be able to Edit & Delete trades
 - Trade History > Support paging
 - Stock Positions > Auto-refresh current Prices on interval

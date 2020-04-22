@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8000',
+  stockPriceApiUrl: 'https://financialmodelingprep.com/api/v3/company/stock/list',
 };
 
 /*

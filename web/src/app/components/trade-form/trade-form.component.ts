@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Trade } from 'src/app/models/trade.model';
 import { TradeService } from 'src/app/services/trade.service';
 import { StockService } from 'src/app/services/stock.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-trade-form',
@@ -14,7 +15,11 @@ export class TradeFormComponent implements OnInit {
   model: Trade = new Trade();
   @ViewChild("stockSymbol") stockSymbolField: ElementRef;
 
-  constructor(private tradeService: TradeService, private stockService: StockService) { }
+  constructor(
+    private tradeService: TradeService, 
+    private stockService: StockService, 
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     // Listen for updates to trades.
@@ -50,9 +55,10 @@ export class TradeFormComponent implements OnInit {
   onSubmit() {
     const subscription = this.tradeService.save(this.model)
       .subscribe(result => {
+        this.formIsVisible = false;
+        this.toastr.success(`Your trade of ${result.StockSymbol} was saved.`, 'Success!');
         subscription.unsubscribe();
       });
-    this.formIsVisible = false;
   }
 
 }
