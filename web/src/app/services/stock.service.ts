@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 export class StockService {
 
   // TODO: Find more up to date api...
-  private stockPriceApiUrl: string = environment.stockPriceApiUrl;
+  private stockPriceApiUrl = environment.stockPriceApiUrl;
   private stockPriceRefreshDate: Moment;
   private stockPrices: StockPrices;
 

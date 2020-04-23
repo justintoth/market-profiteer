@@ -8,13 +8,10 @@ export const root = (_req: Request, res: Response) => {
   return res.send('API is working 🤓');
 };
 
-let attempts = 0;
-
 export const getAllTrades = (req: Request, res: Response) => {
   // Retrieve trades from JSON file.
-  let trades:Trade[] = [];
   let json = fs.readFileSync(jsonFilePath, 'utf-8');
-  trades = JSON.parse(json);
+  let trades:Trade[] = JSON.parse(json);
 
   console.log(`Retrieved ${trades.length} trades...`);
 
@@ -29,27 +26,40 @@ export const saveTrade = (req: Request, res: Response) => {
   }
 
   // Retrieve trades from JSON file.
-  let trades:Trade[] = [];
   let json = fs.readFileSync(jsonFilePath, 'utf-8');
-  trades = JSON.parse(json);
+  let trades:Trade[] = JSON.parse(json);
+
+  // Check if new or existing trade.
+  let existingTrade = trades.find(t => t.Id === req.body.Id);
 
   // Prepend new trade.
-  let trade:Trade = new Trade();
+  let trade = existingTrade || new Trade();
   trade.Date = req.body.Date;
   trade.StockSymbol = req.body.StockSymbol;
   trade.IsPurchase = req.body.IsPurchase || false;
   trade.Quantity = req.body.Quantity;
   trade.Price = req.body.Price;
-  trades.unshift(trade);
+  // Prepend new trade, update existing trade in place.
+  if (!existingTrade) {
+    trade.Id = generateGuid();
+    trades.unshift(trade);
+  }
 
   // Save trade to JSON file.
-  json = JSON.stringify(trades, null, 2);
-  fs.writeFileSync(jsonFilePath, json);
+  fs.writeFileSync(jsonFilePath, JSON.stringify(trades, null, 2));
 
-  console.log('Saved trade: ' + JSON.stringify(trade));
+  console.log(`Saved ${!existingTrade ? 'new' : 'existing'} trade: `, trade);
 
   res.json(trade);
 };
+
+function generateGuid(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0,
+      v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
 
 export const saveDummyTrades = (req: Request, res: Response) => {
   // Sample trades...

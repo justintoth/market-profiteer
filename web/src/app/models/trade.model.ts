@@ -1,4 +1,5 @@
 export class Trade {
+    public Id:String;
     public Date:Date;
     public StockSymbol:string;
     public IsPurchase:boolean;

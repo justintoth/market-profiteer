@@ -9,5 +9,8 @@
       <div *ngIf="!trade.IsPurchase" class="{{ trade.SaleProfitLoss >= 0 ? 'green' : 'red' }}">
         {{ trade.SaleProfitLoss >= 0 ? 'Profit: ' : 'Loss: ' }} {{ trade.SaleProfitLoss | currency }}
       </div>
+      <div>
+        <a (click)="onEdit(trade)" class="btn btn-light">Edit</a>
+      </div>
     </li>
 </ul>

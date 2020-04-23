@@ -10,9 +10,10 @@ import { environment } from 'src/environments/environment';
 })
 export class TradeService {
 
-  private apiUrl:string = environment.apiUrl;
-  private tradesSubject:BehaviorSubject<Trade[]> = new BehaviorSubject<Trade[]>([]);
-  private tradesProfitLossSubject:BehaviorSubject<Trade[]> = new BehaviorSubject<Trade[]>([]);
+  private apiUrl = environment.apiUrl;
+  private tradesSubject = new BehaviorSubject<Trade[]>([]);
+  private tradesProfitLossSubject = new BehaviorSubject<Trade[]>([]);
+  private editTradeSubject = new BehaviorSubject<Trade>(new Trade());
 
   constructor(private http: HttpClient) { }
 
@@ -33,8 +34,18 @@ export class TradeService {
       .pipe(
         tap(result => {
           console.log('Saved the trade!');
-          var trades = this.tradesSubject.value;
-          trades.unshift(result);
+          // Add new trade or update existing trade.
+          let trades = this.tradesSubject.value;
+          let existingTrade = trades.find(t => t.Id === result.Id);
+          if (!existingTrade)
+            trades.unshift(result);
+          else {
+            existingTrade.Date = result.Date;
+            existingTrade.StockSymbol = result.StockSymbol;
+            existingTrade.IsPurchase = result.IsPurchase;
+            existingTrade.Price = result.Price;
+            existingTrade.Quantity = result.Quantity;
+          }
           console.log('Trade Service > save > Updating tradesSubject: ', trades.length);
           this.tradesSubject.next(trades);
         })
@@ -47,6 +58,10 @@ export class TradeService {
 
   public get tradesProfitLossSubscription(): BehaviorSubject<Trade[]> {
     return this.tradesProfitLossSubject;
+  }
+
+  public get editTradeSubscription(): BehaviorSubject<Trade> {
+    return this.editTradeSubject;
   }
 
 }

@@ -11,9 +11,9 @@ import { TradeService } from 'src/app/services/trade.service';
 export class StockPositionsComponent implements OnInit {
 
   public stockPositions: StockPosition[] = [];
-  public tradesProfit:number = 0;
-  public stockPositionsProfit:number = 0;
-  public totalProfit:number = 0;
+  public tradesProfit = 0;
+  public stockPositionsProfit = 0;
+  public totalProfit = 0;
 
   constructor(private tradeService: TradeService, private stockService: StockService) {
    }

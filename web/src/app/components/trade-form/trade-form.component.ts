@@ -11,8 +11,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class TradeFormComponent implements OnInit {
 
-  formIsVisible: boolean = false;
-  model: Trade = new Trade();
+  formIsVisible = false;
+  model = new Trade();
   @ViewChild("stockSymbol") stockSymbolField: ElementRef;
 
   constructor(
@@ -25,12 +25,27 @@ export class TradeFormComponent implements OnInit {
     // Listen for updates to trades.
     this.tradeService.tradesSubscription.subscribe((result) => {
       // Reset form.
+      this.model.Id = null;
       this.model.Date = new Date();
       this.model.StockSymbol = null;
       this.model.IsPurchase = true;
       this.model.Price = null;
       this.model.Quantity = null;
       // TODO: Show alert that form was saved.
+    });
+    // Listen for updates to edit trade.
+    this.tradeService.editTradeSubscription.subscribe((result) => {
+      if (result.Date) {
+        // Populate form values.
+        this.model.Id = result.Id;
+        this.model.Date = new Date(result.Date);
+        this.model.StockSymbol = result.StockSymbol;
+        this.model.IsPurchase = result.IsPurchase;
+        this.model.Price = result.Price;
+        this.model.Quantity = result.Quantity;
+        // Show form.
+        this.formIsVisible = true;
+      }
     });
   }
 

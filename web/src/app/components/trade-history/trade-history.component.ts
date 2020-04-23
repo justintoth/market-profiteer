@@ -31,4 +31,9 @@ export class TradeHistoryComponent implements OnInit {
       console.log('Trade History Component > Listening to updates');
     }
 
+    onEdit(trade:Trade): void {
+      console.log('Trade History Component > Edit trade: ', trade);
+      this.tradeService.editTradeSubscription.next(trade);
+    }
+
 }
