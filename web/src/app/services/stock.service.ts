@@ -25,6 +25,8 @@ export class StockService {
   }
 
   public getAllPositions(trades: Trade[]): Observable<StockPosition[]> {
+    if (trades.length === 0)
+      return;
     // Get stock prices.
     return this.getAllPrices()
       .pipe(
@@ -59,6 +61,7 @@ export class StockService {
           });
 
           // Refresh trades, now that we have calculated sale profit or loss.
+          console.log('Stock Service > getAllPositions > Updating tradesProfitLossSubscription: ', trades.length);
           this.tradeService.tradesProfitLossSubscription.next(trades);
 
           // Remove stock positions that were fully sold.

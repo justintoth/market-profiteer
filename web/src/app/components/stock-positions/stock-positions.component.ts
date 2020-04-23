@@ -21,8 +21,14 @@ export class StockPositionsComponent implements OnInit {
   ngOnInit(): void {
     // Listen for updates to trades.
     this.tradeService.tradesSubscription.subscribe((trades) => {
+      if (trades.length === 0)
+          return;
+      console.log('Stock Positions Component > tradesSubscription > trades: ', trades.length);
       // Get all stock positions.
-      const subscription = this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
+      /*const subscription =*/ this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
+        if (stockPositions.length === 0)
+          return;
+        console.log('Stock Positions Component > getAllPositions > stockPositions: ', stockPositions.length);
         this.stockPositions = stockPositions;
         // Update summary.
         this.tradesProfit = trades
@@ -33,6 +39,7 @@ export class StockPositionsComponent implements OnInit {
         this.totalProfit = this.tradesProfit + this.stockPositionsProfit;
         //subscription.unsubscribe();
       });
+      console.log('Stock Positions Component > Listening to updates');
     });
     
   }

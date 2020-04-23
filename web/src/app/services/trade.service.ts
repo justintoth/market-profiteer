@@ -20,6 +20,7 @@ export class TradeService {
     return this.http.get<Trade[]>(`${this.apiUrl}/trades`)
       .pipe(
         tap(result => {
+          console.log('Trade Service > getAll > Updating tradesSubject: ', result.length);
           this.tradesSubject.next(result);
           console.log(`Retrieved ${result.length} trades...`);
         })
@@ -34,6 +35,7 @@ export class TradeService {
           console.log('Saved the trade!');
           var trades = this.tradesSubject.value;
           trades.unshift(result);
+          console.log('Trade Service > save > Updating tradesSubject: ', trades.length);
           this.tradesSubject.next(trades);
         })
       );

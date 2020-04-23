@@ -14,12 +14,14 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 - Trade Form > Be able to Edit & Delete trades
 - Trade History > Support paging
-- Stock Positions > Auto-refresh current Prices on interval
+- Stock Positions > Auto-refresh current prices on interval (Monday through Friday 9:30am to 4:00pm EST
 
 To make this into a product...
+- Create logo
 - Allow using for free but the data is only stored temporarily
 - Allow creating an account to persist the data
 - After a free trial expires, or to use additional features, require them to pay
 - Add google analytics
 - Perform SEO
 - Run google ads
+- Allow auto-imports from TD Ameritrade, TRowe Price, etc... using Puppeteer
