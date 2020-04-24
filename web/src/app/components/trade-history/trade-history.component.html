@@ -10,7 +10,8 @@
         {{ trade.SaleProfitLoss >= 0 ? 'Profit: ' : 'Loss: ' }} {{ trade.SaleProfitLoss | currency }}
       </div>
       <div>
-        <a (click)="onEdit(trade)" class="btn btn-light">Edit</a>
+        <a (click)="onEdit(trade)" class="btn btn-light">Edit</a> 
+        <a (click)="onDelete(trade)" class="btn btn-light">Delete</a>
       </div>
     </li>
 </ul>

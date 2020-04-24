@@ -53,6 +53,27 @@ export const saveTrade = (req: Request, res: Response) => {
   res.json(trade);
 };
 
+export const deleteTrade = (req: Request, res: Response) => {
+  console.log('In delete trade...');
+  
+  // Get trade id.
+  let tradeId = req.params.tradeId;
+
+  // Retrieve trades from JSON file.
+  let json = fs.readFileSync(jsonFilePath, 'utf-8');
+  let trades: Trade[] = JSON.parse(json);
+
+  // Remove trade.
+  trades = trades.filter(t => t.Id !== tradeId);
+
+  // Save trades to JSON file.
+  fs.writeFileSync(jsonFilePath, JSON.stringify(trades, null, 2));
+
+  console.log('Deleted trade with id: ', tradeId);
+
+  res.json(tradeId);
+};
+
 function generateGuid(): string {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = Math.random() * 16 | 0,

@@ -12,7 +12,6 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
-- Trade Form > Be able to Delete trades
 - Trade History > Support paging
 - Stock Positions > Auto-refresh current prices on interval (Monday through Friday 9:30am to 4:00pm EST
 

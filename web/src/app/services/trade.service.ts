@@ -29,7 +29,7 @@ export class TradeService {
   }
 
   public save(trade: Trade): Observable<Trade> {
-    console.log(`Saving the trade... ${JSON.stringify(trade)}`);
+    console.log('Saving the trade...', trade);
     return this.http.post<Trade>(`${this.apiUrl}/trades`, trade)
       .pipe(
         tap(result => {
@@ -52,6 +52,21 @@ export class TradeService {
       );
   }
 
+  public delete(trade: Trade): Observable<string> {
+    console.log('Deleting the trade...', trade);
+    return this.http.delete<string>(`${this.apiUrl}/trades/${encodeURI(trade.Id)}`)
+      .pipe(
+        tap(result => {
+          console.log('Deleted the trade!');
+          // Remove deleted trade.
+          let trades = this.tradesSubject.value;
+          trades = trades.filter(t => t.Id !== trade.Id);
+          console.log('Trade Service > delete > Updating tradesSubject: ', trades.length);
+          this.tradesSubject.next(trades);
+        })
+      );
+  }
+
   public get tradesSubscription(): BehaviorSubject<Trade[]> {
     return this.tradesSubject;
   }
@@ -61,7 +76,7 @@ export class TradeService {
   }
 
   public get editTradeSubscription(): BehaviorSubject<Trade> {
-    return this.editTradeSubject;
+    return this.editTradeSubject; 
   }
 
 }
