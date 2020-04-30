@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" [hidden]="formIsVisible" (click)="showForm()">Add Trade</button>
+<button type="button" class="btn btn-primary" [hidden]="formIsVisible" (click)="onShowForm()">Add Trade</button>
 
 <div class="card" [hidden]="!formIsVisible">
     <div class="card-body">
@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 <input type="text" class="form-control" id="stockSymbol" required placeholder="Stock Symbol"
-                    [(ngModel)]="model.StockSymbol" (blur)="stockSymbolChanged()" name="StockSymbol" #stockSymbol />
+                    [(ngModel)]="model.StockSymbol" (blur)="onStockSymbolChanged()" name="StockSymbol" #stockSymbol />
             </div>
 
             <div class="form-group form-check">

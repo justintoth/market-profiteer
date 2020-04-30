@@ -4,9 +4,9 @@ import { Trade } from '../models/trade.model';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { HttpClient } from '@angular/common/http';
-import { StockPrices } from '../models/stock-prices';
+import { StockPrices } from '../models/stock-prices.model';
 import { Observable, of } from 'rxjs';
-import { StockPrice } from '../models/stock-price';
+import { StockPrice } from '../models/stock-price.model';
 import { TradeService } from './trade.service';
 import { mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -25,8 +25,6 @@ export class StockService {
   }
 
   public getAllPositions(trades: Trade[]): Observable<StockPosition[]> {
-    if (trades.length === 0)
-      return;
     // Get stock prices.
     return this.getAllPrices()
       .pipe(

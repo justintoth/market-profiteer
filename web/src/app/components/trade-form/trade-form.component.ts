@@ -49,13 +49,13 @@ export class TradeFormComponent implements OnInit {
     });
   }
 
-  showForm() {
+  onShowForm() {
     this.formIsVisible = true;
     // Set focus.
     setTimeout(() => { this.stockSymbolField.nativeElement.focus(); });
   }
 
-  stockSymbolChanged() {
+  onStockSymbolChanged() {
     if (this.model.Price)
       return;
     // If no price inputted, populate it from stock.
@@ -72,7 +72,7 @@ export class TradeFormComponent implements OnInit {
       .subscribe(result => {
         this.formIsVisible = false;
         this.toastr.success(`Your trade of ${result.StockSymbol} was saved.`, 'Success!');
-        subscription.unsubscribe();
+        //subscription.unsubscribe();
       });
   }
 

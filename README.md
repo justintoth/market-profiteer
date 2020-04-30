@@ -12,14 +12,15 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
-- Trade History > Support paging
-- Stock Positions > Auto-refresh current prices on interval (Monday through Friday 9:30am to 4:00pm EST
+- Trade History > Support paging as user scrolls
+- Stock Positions > Auto-refresh current prices on interval (Monday through Friday 9:30am to 4:00pm EST)
+- Summary > Add additional metrics (e.g. profit/loss today / this month / this year?)
 
 To make this into a product...
 - Create logo
-- Allow using for free but the data is only stored temporarily
-- Allow creating an account to persist the data
-- After a free trial expires, or to use additional features, require them to pay
+- Place limitations on free account (e.g. can only add 30 trades?)
+- To use additional features, require them to pay?
+- Store users and trades in MongoDB instead of JSON files?
 - Add google analytics
 - Perform SEO
 - Run google ads

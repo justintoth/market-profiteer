@@ -12,13 +12,15 @@ import { ToastrModule } from 'ngx-toastr';
 import { TradeHistoryComponent } from './components/trade-history/trade-history.component';
 import { StockPositionsComponent } from './components/stock-positions/stock-positions.component';
 import { TradeFormComponent } from './components/trade-form/trade-form.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StockPositionsComponent,
+    UserFormComponent,
+    TradeFormComponent,
     TradeHistoryComponent,
-    TradeFormComponent
+    StockPositionsComponent
   ],
   imports: [
     AppRoutingModule,

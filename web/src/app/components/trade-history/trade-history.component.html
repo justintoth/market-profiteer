@@ -1,6 +1,6 @@
 <h2>Trade History</h2>
 
-<ul class="list-group">
+<ul class="list-group" [hidden]="trades && trades.length === 0">
     <li class="list-group-item" *ngFor="let trade of trades">
       {{ trade.Date | date }}: 
       {{ trade.Quantity }} shares of 
@@ -10,8 +10,12 @@
         {{ trade.SaleProfitLoss >= 0 ? 'Profit: ' : 'Loss: ' }} {{ trade.SaleProfitLoss | currency }}
       </div>
       <div>
-        <a (click)="onEdit(trade)" class="btn btn-light">Edit</a> 
-        <a (click)="onDelete(trade)" class="btn btn-light">Delete</a>
+        <div class="btn-group" role="group">
+          <a (click)="onEdit(trade)" class="btn btn-light">Edit</a> 
+          <a (click)="onDelete(trade)" class="btn btn-light">Delete</a>
+        </div>
       </div>
     </li>
 </ul>
+
+<p [hidden]="trades && trades.length > 0">You haven't added any trades yet!</p>

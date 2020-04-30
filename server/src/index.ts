@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { root, getAllTrades, saveTrade, deleteTrade} from './handlers';
+import { getAllTrades, saveTrade, deleteTrade, saveAllTrades} from './services/trade.service';
+import { saveUser, root, authenticateUser } from './services/user.service';
 
 const app = express();
 const port = process.env.PORT || '8000';
@@ -14,8 +15,13 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', root);
+
+app.post('/users/authenticate', authenticateUser);
+app.post('/users/', saveUser);
+
 app.get('/trades/', getAllTrades);
 app.post('/trades/', saveTrade);
+app.post('/trades/all', saveAllTrades);
 app.delete('/trades/:tradeId', deleteTrade);
 
 app.listen(port, err => {
