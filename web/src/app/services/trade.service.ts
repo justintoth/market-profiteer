@@ -30,29 +30,28 @@ export class TradeService {
       this.getAllFromStorage())
       .pipe(
         tap(result => {
-          console.log('Trade Service > getAll > Updating tradesSubject: ', result.length);
+          console.log(`Trade Service > getAll > Updating tradesSubject with ${result.length} trades`);
           this.tradesSubject.next(result);
-          console.log(`Retrieved ${result.length} trades...`);
         })
       );
   }
 
   private getAllFromStorage():Observable<Trade[]> {
-    console.warn('Not authenticated, getting all trades from local storage...');
+    console.warn('Trade Service > Not authenticated, getting all trades from local storage...');
     let trades:Trade[] = ClientStorage.getAllTrades();
     return of(trades);
   };
 
   public save(trade: Trade): Observable<Trade> {
     trade = trade.Clone();
-    console.log('Saving the trade...', trade);
+    console.log('Trade Service > Saving the trade...', trade);
     const user = this.userService.getAuthenticatedUser();
     return (user ? 
       this.http.post<Trade>(`${this.apiUrl}/trades?userId=${user.Id}`, trade) : 
       this.saveToStorage(trade))
       .pipe(
         tap(result => {
-          console.log('Saved the trade! ', result);
+          console.log('Trade Service > Saved the trade! ', result);
           // Add new trade or update existing trade.
           let trades = this.tradesSubject.value;
           let existingTrade = trades.find(t => t.Id === result.Id);
@@ -72,7 +71,7 @@ export class TradeService {
   }
 
   private saveToStorage(trade: Trade):Observable<Trade> {
-    console.warn('Not authenticated, saving trade to local storage...', trade);
+    console.warn('Trade Service > Not authenticated, saving trade to local storage...', trade);
     // Retrieve trades from local storage.
     let trades:Trade[] = ClientStorage.getAllTrades();
     // Check if new or existing trade.
@@ -107,14 +106,14 @@ export class TradeService {
   }
 
   public delete(trade: Trade): Observable<string> {
-    console.log('Deleting the trade...', trade);
+    console.log('Trade Service > Deleting the trade...', trade);
     const user = this.userService.getAuthenticatedUser();
     return (user ? 
       this.http.delete<string>(`${this.apiUrl}/trades/${encodeURI(trade.Id)}?userId=${user.Id}`) : 
       this.deleteFromStorage(trade))
       .pipe(
         tap(result => {
-          console.log('Deleted the trade!');
+          console.log('Trade Service > Deleted the trade!');
           // Remove deleted trade.
           let trades = this.tradesSubject.value;
           trades = trades.filter(t => t.Id !== trade.Id);
@@ -125,7 +124,7 @@ export class TradeService {
   }
 
   private deleteFromStorage(trade: Trade):Observable<string> {
-    console.warn('Not authenticated, deleting trade from local storage...');
+    console.warn('Trade Service > Not authenticated, deleting trade from local storage...');
     // Retrieve trades from local storage.
     let trades:Trade[] = ClientStorage.getAllTrades();
     // Remove trade.

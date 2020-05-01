@@ -12,15 +12,16 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
-- Trade History > Support paging as user scrolls
-- Stock Positions > Auto-refresh current prices on interval (Monday through Friday 9:30am to 4:00pm EST)
+- Create new Summary component, refactored out from Stock Positions component
+- Summary > Show last stock price refresh date/time and if stock market is open or not (Monday through Friday 9:30am to 4:00pm EST)
 - Summary > Add additional metrics (e.g. profit/loss today / this month / this year?)
+- Trade History > Support paging as user scrolls
 
 To make this into a product...
 - Create logo
 - Place limitations on free account (e.g. can only add 30 trades?)
 - To use additional features, require them to pay?
-- Store users and trades in MongoDB instead of JSON files?
+- Store users and trades in MongoDB instead of JSON files
 - Add google analytics
 - Perform SEO
 - Run google ads

@@ -10,6 +10,8 @@ import { StockPrice } from '../models/stock-price.model';
 import { TradeService } from './trade.service';
 import { mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { utils } from 'protractor';
+import { Utils } from '../shared/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +22,24 @@ export class StockService {
   private stockPriceApiUrl = environment.stockPriceApiUrl;
   private stockPriceRefreshDate: Moment;
   private stockPrices: StockPrices;
+  private refreshInterval;
+  private refreshIntervalMinutes: number = 1;
 
   constructor(private http: HttpClient, private tradeService: TradeService) { 
+  }
+
+  public enableAutoRefresh() {
+    this.refreshInterval = setInterval(() => {
+      // Check if stock market is open.
+      if (!Utils.stockMarketIsOpen()) {
+        console.warn('Stock Service > Stock market isn\'t open so no need to refresh stock positions');
+        return;
+      }
+      // Refresh stock positions.
+      this.tradeService.tradesSubscription.subscribe((trades) => {
+        this.getAllPositions(trades).subscribe(stockPositions => { });
+      });
+    }, this.refreshIntervalMinutes * 60 * 1000);
   }
 
   public getAllPositions(trades: Trade[]): Observable<StockPosition[]> {
@@ -59,7 +77,7 @@ export class StockService {
           });
 
           // Refresh trades, now that we have calculated sale profit or loss.
-          console.log('Stock Service > getAllPositions > Updating tradesProfitLossSubscription: ', trades.length);
+          console.log(`Stock Service > getAllPositions > Updating tradesProfitLossSubscription with ${trades.length} trades`);
           this.tradeService.tradesProfitLossSubscription.next(trades);
 
           // Remove stock positions that were fully sold.
@@ -79,7 +97,7 @@ export class StockService {
           });
 
           if (stockPositions.length > 0)
-            console.log(`Calculated ${stockPositions.length} stock positions...`);
+            console.log(`Stock Service > Updated ${stockPositions.length} stock positions...`);
           return of(stockPositions);
         })
       );
@@ -95,7 +113,7 @@ export class StockService {
             this.stockPrices = result;
             result.symbolsList.forEach(x => x.price = Math.round(x.price * 100) / 100);
             this.stockPriceRefreshDate = moment();
-            console.log(`Retrieved ${result.symbolsList.length} stock prices...`);
+            console.log(`Stock Service > Retrieved ${result.symbolsList.length} stock prices...`);
           })
         );
     } else {

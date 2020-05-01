@@ -18,11 +18,11 @@ export class UserService {
   ) { }
 
   public save(user: User): Observable<User> {
-    console.log('Saving user...', user);
+    console.log('User Service > Saving user...', user);
     return this.http.post<User>(`${this.apiUrl}/users`, user)
       .pipe(
         tap(result => {
-          console.log('Saved user: ', result);
+          console.log('User Service > Saved user: ', result);
           // Save user to local storage.
           ClientStorage.saveUser(result);
         })
@@ -30,22 +30,22 @@ export class UserService {
   }
 
   public authenticate(user: User): Observable<User> {
-    console.log('Authenticating user...', user);
+    console.log('User Service > Authenticating user...', user);
     return this.http.post<User>(`${this.apiUrl}/users/authenticate`, user)
       .pipe(
         tap(result => {
           if (result) {
-            console.log('Authentication succeeded: ', result);
+            console.log('User Service > Authentication succeeded: ', result);
             // Save user to local storage.
             ClientStorage.saveUser(result);
           } else
-            console.warn('Authentication failed: ', result);
+            console.warn('User Service > Authentication failed: ', result);
         })
       );
   }
 
   public signOut() {
-    console.log('Signing out user...');
+    console.log('User Service > Signing out user...');
     ClientStorage.deleteUser();
   }
 

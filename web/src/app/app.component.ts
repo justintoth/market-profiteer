@@ -1,3 +1,4 @@
+import { StockService } from 'src/app/services/stock.service';
 import { Component, OnInit } from '@angular/core';
 import { TradeService } from './services/trade.service';
 
@@ -9,15 +10,18 @@ import { TradeService } from './services/trade.service';
 export class AppComponent implements OnInit {
   title = 'stock-marathoner';
 
-  constructor(private tradeService: TradeService) { 
+  constructor(
+    private tradeService: TradeService,
+    private stockService: StockService
+  ) { 
   }
 
   ngOnInit(): void {
     // Get all trades.
     console.log('App Component > Get all trades');
-    const subscription = this.tradeService.getAll()
-        .subscribe(result => {
-          //subscription.unsubscribe();
-        });
+    this.tradeService.getAll()
+        .subscribe(result => { });
+    // Enable auto-refreshing stock positions.
+    this.stockService.enableAutoRefresh();
   }
 }
