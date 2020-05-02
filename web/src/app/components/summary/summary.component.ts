@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StockService } from 'src/app/services/stock.service';
 import { TradeService } from 'src/app/services/trade.service';
+import { Utils } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-summary',
@@ -14,7 +15,7 @@ export class SummaryComponent implements OnInit {
   public totalProfit = 0;
 
   constructor(private tradeService: TradeService, private stockService: StockService) {
-   }
+  }
 
   ngOnInit(): void {
     // Listen for updates to trades.
@@ -32,7 +33,15 @@ export class SummaryComponent implements OnInit {
         this.totalProfit = this.tradesProfit + this.stockPositionsProfit;
       });
     });
-    
+  }
+
+  stockPriceRefreshDate(): string {
+    const refreshDate = this.stockService.stockPriceRefreshDate;
+    return refreshDate ? refreshDate.format('MMMM Do YYYY, h:mm a') : null;
+  }
+
+  stockMarketIsOpen(): boolean {
+    return Utils.stockMarketIsOpen();
   }
 
 }

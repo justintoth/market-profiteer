@@ -19,7 +19,7 @@ export class StockService {
 
   // TODO: Find more up to date api...
   private stockPriceApiUrl = environment.stockPriceApiUrl;
-  private stockPriceRefreshDate: Moment;
+  public stockPriceRefreshDate: Moment;
   private stockPrices: StockPrices;
   private refreshInterval;
   private refreshIntervalMinutes: number = 1;
