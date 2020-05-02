@@ -31,7 +31,6 @@ export class TradeFormComponent implements OnInit {
       this.model.IsPurchase = true;
       this.model.Price = null;
       this.model.Quantity = null;
-      // TODO: Show alert that form was saved.
     });
     // Listen for updates to edit trade.
     this.tradeService.editTradeSubscription.subscribe((result) => {
@@ -59,20 +58,18 @@ export class TradeFormComponent implements OnInit {
     if (this.model.Price)
       return;
     // If no price inputted, populate it from stock.
-    const subscription = this.stockService.getPrice(this.model.StockSymbol)
+    this.stockService.getPrice(this.model.StockSymbol)
       .subscribe(result => {
         if (result)
           this.model.Price = result.price;
-        //subscription.unsubscribe();
       });
   }
 
   onSubmit() {
-    const subscription = this.tradeService.save(this.model)
+    this.tradeService.save(this.model)
       .subscribe(result => {
         this.formIsVisible = false;
         this.toastr.success(`Your trade of ${result.StockSymbol} was saved.`, 'Success!');
-        //subscription.unsubscribe();
       });
   }
 

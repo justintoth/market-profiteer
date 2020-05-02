@@ -24,7 +24,7 @@ export class UserFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.isAuthenticated = this.userService.getAuthenticatedUser() != null;
+    this.isAuthenticated = this.userService.isAuthenticated();
   }
 
   onShowSigninForm() {
@@ -46,35 +46,28 @@ export class UserFormComponent implements OnInit {
   }
 
   onSignin() {
-    const userSubscription = this.userService.authenticate(this.model)
-      .subscribe(userResult => {
-        if (userResult) {
+    this.userService.authenticate(this.model)
+      .subscribe(
+        userResult => {
           this.isAuthenticated = true;
           this.signinFormIsVisible = false;
           this.toastr.success('You have been signed in.', 'Success!');
           // Refresh trades.
-          const tradeSubscription = this.tradeService.getAll()
-            .subscribe(result => {
-              tradeSubscription.unsubscribe();
-            });
-        } else
-          this.toastr.error('Your signin credentials are incorrect.', 'Error!');
-        userSubscription.unsubscribe();
-      });
+          this.tradeService.getAll()
+            .subscribe(result => { });
+        },
+        error => this.toastr.error('Your signin credentials are incorrect.', 'Error!')
+      );
   }
 
   onSignup() {
-    const userSubscription = this.userService.save(this.model)
+    this.userService.save(this.model)
       .subscribe(userResult => {
         this.isAuthenticated = true;
         this.signupFormIsVisible = false;
         this.toastr.success('You have been signed up.', 'Success!');
-        userSubscription.unsubscribe();
         const tradeSubscription = this.tradeService.saveAllFromStorage()
-          .subscribe(tradesResult => {
-            this.toastr.success('Your trades have been copied over to your new account.', 'Migrated!');
-            tradeSubscription.unsubscribe();
-          })
+          .subscribe(tradesResult => this.toastr.success('Your trades have been copied over to your new account.', 'Migrated!'))
       });
   }
 
@@ -82,10 +75,8 @@ export class UserFormComponent implements OnInit {
     this.userService.signOut();
     this.isAuthenticated = false;
     // Refresh trades.
-    const tradeSubscription = this.tradeService.getAll()
-      .subscribe(result => {
-        //tradeSubscription.unsubscribe();
-      });
+    this.tradeService.getAll()
+      .subscribe(result => { });
   }
 
   hideForm() {

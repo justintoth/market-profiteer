@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiHost: 'localhost:8000',
   apiUrl: 'http://localhost:8000',
   stockPriceApiUrl: 'https://financialmodelingprep.com/api/v3/company/stock/list',
 };

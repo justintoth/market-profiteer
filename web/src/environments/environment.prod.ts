@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiHost: 'api.stockmarathoner.com',
+  apiUrl: 'http://api.stockmarathoner.com',
 };

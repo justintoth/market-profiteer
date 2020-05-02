@@ -13,7 +13,6 @@ import { ClientStorage } from '../shared/client-storage';
 })
 export class TradeService {
 
-  private apiUrl = environment.apiUrl;
   private tradesSubject = new BehaviorSubject<Trade[]>([]);
   private tradesProfitLossSubject = new BehaviorSubject<Trade[]>([]);
   private editTradeSubject = new BehaviorSubject<Trade>(new Trade());
@@ -24,9 +23,8 @@ export class TradeService {
   ) { }
 
   public getAll(): Observable<Trade[]> {
-    const user = this.userService.getAuthenticatedUser();
-    return (user ? 
-      this.http.get<Trade[]>(`${this.apiUrl}/trades?userId=${user.Id}`) : 
+    return (this.userService.isAuthenticated() ? 
+      this.http.get<Trade[]>(`${environment.apiUrl}/trades`) : 
       this.getAllFromStorage())
       .pipe(
         tap(result => {
@@ -45,9 +43,8 @@ export class TradeService {
   public save(trade: Trade): Observable<Trade> {
     trade = trade.Clone();
     console.log('Trade Service > Saving the trade...', trade);
-    const user = this.userService.getAuthenticatedUser();
-    return (user ? 
-      this.http.post<Trade>(`${this.apiUrl}/trades?userId=${user.Id}`, trade) : 
+    return (this.userService.isAuthenticated() ? 
+      this.http.post<Trade>(`${environment.apiUrl}/trades`, trade) : 
       this.saveToStorage(trade))
       .pipe(
         tap(result => {
@@ -93,8 +90,7 @@ export class TradeService {
     // Retrieve trades from local storage.
     let trades:Trade[] = ClientStorage.getAllTrades();
     // Save trades to api.
-    const user = this.userService.getAuthenticatedUser();
-    return this.http.post<Trade[]>(`${this.apiUrl}/trades/all?userId=${user.Id}`, trades)
+    return this.http.post<Trade[]>(`${environment.apiUrl}/trades/all`, trades)
       .pipe(
         tap(result => {
           console.log('Trade Service > saveAllFromStorage > Updating tradesSubject: ', result.length);
@@ -107,9 +103,8 @@ export class TradeService {
 
   public delete(trade: Trade): Observable<string> {
     console.log('Trade Service > Deleting the trade...', trade);
-    const user = this.userService.getAuthenticatedUser();
-    return (user ? 
-      this.http.delete<string>(`${this.apiUrl}/trades/${encodeURI(trade.Id)}?userId=${user.Id}`) : 
+    return (this.userService.isAuthenticated() ? 
+      this.http.delete<string>(`${environment.apiUrl}/trades/${encodeURI(trade.Id)}`) : 
       this.deleteFromStorage(trade))
       .pipe(
         tap(result => {

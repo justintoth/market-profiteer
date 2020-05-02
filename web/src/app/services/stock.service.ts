@@ -10,7 +10,6 @@ import { StockPrice } from '../models/stock-price.model';
 import { TradeService } from './trade.service';
 import { mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { utils } from 'protractor';
 import { Utils } from '../shared/utils';
 
 @Injectable({
@@ -37,6 +36,8 @@ export class StockService {
       }
       // Refresh stock positions.
       this.tradeService.tradesSubscription.subscribe((trades) => {
+        if (trades.length === 0)
+          console.warn('Stock Service > enableAutoRefresh > tradesSubscription > trades: ', trades.length);
         this.getAllPositions(trades).subscribe(stockPositions => { });
       });
     }, this.refreshIntervalMinutes * 60 * 1000);

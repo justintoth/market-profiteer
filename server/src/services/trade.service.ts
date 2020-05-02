@@ -3,10 +3,9 @@ import { Trade } from '../models/trade.model';
 import { Utils } from '../shared/utils';
 import { JsonStorage } from '../shared/json-storage';
 
-// TODO: Provide more robust authentication scheme...
-
-export const getAllTrades = (req: Request, res: Response) => {
-  const userId = req.query.userId.toString();
+export const getAllTrades = (req: any, res: Response) => {
+  console.log('in getAllTrades');
+  const userId = req.user.Id;
   if (!userId)
     return res.status(401);
 
@@ -15,8 +14,8 @@ export const getAllTrades = (req: Request, res: Response) => {
   return res.json(trades);
 };
 
-export const saveTrade = (req: Request, res: Response) => {
-  const userId = req.query.userId.toString();
+export const saveTrade = (req: any, res: Response) => {
+  const userId = req.user.Id;
   if (!userId)
     return res.status(401);
 
@@ -41,8 +40,8 @@ export const saveTrade = (req: Request, res: Response) => {
   res.json(trade);
 };
 
-export const saveAllTrades = (req: Request, res: Response) => {
-  const userId = req.query.userId.toString();
+export const saveAllTrades = (req: any, res: Response) => {
+  const userId = req.user.Id;
   if (!userId)
     return res.status(401);
 
@@ -53,8 +52,8 @@ export const saveAllTrades = (req: Request, res: Response) => {
   res.json(trades);
 };
 
-export const deleteTrade = (req: Request, res: Response) => {
-  const userId = req.query.userId.toString();
+export const deleteTrade = (req: any, res: Response) => {
+  const userId = req.user.Id;
   if (!userId)
     return res.status(401);
 

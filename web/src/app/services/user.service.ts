@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
 import { ClientStorage } from '../shared/client-storage';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private apiUrl = environment.apiUrl;
-
   constructor(
     private http: HttpClient, 
+    private jwtHelper: JwtHelperService
   ) { }
 
   public save(user: User): Observable<User> {
     console.log('User Service > Saving user...', user);
-    return this.http.post<User>(`${this.apiUrl}/users`, user)
+    return this.http.post<User>(`${environment.apiUrl}/users`, user)
       .pipe(
         tap(result => {
           console.log('User Service > Saved user: ', result);
@@ -29,17 +29,15 @@ export class UserService {
       );
   }
 
-  public authenticate(user: User): Observable<User> {
+  public authenticate(user: User): Observable<boolean> {
     console.log('User Service > Authenticating user...', user);
-    return this.http.post<User>(`${this.apiUrl}/users/authenticate`, user)
+    return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, user)
       .pipe(
-        tap(result => {
-          if (result) {
-            console.log('User Service > Authentication succeeded: ', result);
-            // Save user to local storage.
-            ClientStorage.saveUser(result);
-          } else
-            console.warn('User Service > Authentication failed: ', result);
+        map(result => {
+          console.log('User Service > Authentication succeeded: ', result);
+          // Save user to local storage.
+          ClientStorage.saveUser(result);
+          return true;
         })
       );
   }
@@ -51,6 +49,15 @@ export class UserService {
 
   public getAuthenticatedUser(): User {
     return ClientStorage.getUser();
+  }
+
+  public isAuthenticated(): boolean {
+    /*if (ClientStorage.getUser() != null) {
+      console.log('ClientStorage.getUser().AuthToken: ' + ClientStorage.getUser().AuthToken);
+      console.log('this.jwtHelper.isTokenExpired(): ' + this.jwtHelper.isTokenExpired());
+      console.log('this.jwtHelper.isTokenExpired(ClientStorage.getUser().AuthToken): ' + this.jwtHelper.isTokenExpired(ClientStorage.getUser().AuthToken));
+    }*/
+    return ClientStorage.getUser() != null && !this.jwtHelper.isTokenExpired();
   }
 
 }
