@@ -18,6 +18,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { UserService } from './services/user.service';
 import { ClientStorage } from './shared/client-storage';
 import { environment } from 'src/environments/environment';
+import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { environment } from 'src/environments/environment';
     UserFormComponent,
     TradeFormComponent,
     TradeHistoryComponent,
-    StockPositionsComponent
+    StockPositionsComponent,
+    SummaryComponent
   ],
   imports: [
     AppRoutingModule,

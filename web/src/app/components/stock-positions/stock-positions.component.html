@@ -1,12 +1,3 @@
-<h2>Summary</h2>
-<ul class="list-group">
-    <li class="list-group-item {{ tradesProfit >= 0 ? 'green' : 'red' }}">Trades {{ tradesProfit >= 0 ? 'Profit' : 'Loss' }}: {{ tradesProfit | currency }}</li>
-    <li class="list-group-item {{ stockPositionsProfit >= 0 ? 'green' : 'red' }}">Stock Positions {{ stockPositionsProfit >= 0 ? 'Profit' : 'Loss' }}: {{ stockPositionsProfit | currency }}</li>
-    <li class="list-group-item {{ totalProfit >= 0 ? 'green' : 'red' }}">Total {{ totalProfit >= 0 ? 'Profit' : 'Loss' }}: {{ totalProfit | currency }}</li>
-</ul>
-
-<hr />
-
 <h2>Stock Positions</h2>
 
 <table class="table table-striped table-hover" [hidden]="stockPositions && stockPositions.length === 0">

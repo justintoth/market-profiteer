@@ -14,7 +14,6 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 - Handle expired auth tokens
 - Fix 0 trades bug
-- Create new Summary component, refactored out from Stock Positions component
 - Summary > Show last stock price refresh date/time and if stock market is open or not (Monday through Friday 9:30am to 4:00pm EST)
 - Summary > Add additional metrics (e.g. profit/loss today / this month / this year?)
 - Trade History > Support paging as user scrolls
