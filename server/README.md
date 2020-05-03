@@ -16,7 +16,7 @@ Run `yarn dev` for a dev server. Navigate to `http://localhost:8000/`.
 
 yarn build (from Dev environment)
 Copy over dist folder to Prod server and open command prompt there
+npm install
 npm install -g node-windows
 npm link node-windows
 node install.js
-Sample service install script: set PORT=80 && set HOST=api.marketprofiteer.com && node C:\\MarketProfiteer\\Api\\index.js

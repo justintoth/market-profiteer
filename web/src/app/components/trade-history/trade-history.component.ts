@@ -15,23 +15,23 @@ export class TradeHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      // Listen for updates to trades.
-      this.tradeService.tradesSubscription.subscribe(result => {
-        this.trades = result;
-      });
-      this.tradeService.tradesProfitLossSubscription.subscribe(result => {
-        this.trades = result;
-      });
-    }
+    // Listen for updates to trades.
+    this.tradeService.tradesSubscription.subscribe(result => {
+      this.trades = result;
+    });
+    this.tradeService.tradesProfitLossSubscription.subscribe(result => {
+      this.trades = result;
+    });
+  }
 
-    onEdit(trade:Trade): void {
-      console.log('Trade History Component > Edit trade: ', trade);
-      this.tradeService.editTradeSubscription.next(trade);
-    }
+  onEdit(trade:Trade): void {
+    console.log('Trade History Component > Edit trade: ', trade);
+    this.tradeService.editTradeSubscription.next(trade);
+  }
 
-    onDelete(trade:Trade): void {
-      console.log('Trade History Component > Delete trade: ', trade);
-      this.tradeService.delete(trade).subscribe(result => {  });
-    }
+  onDelete(trade:Trade): void {
+    console.log('Trade History Component > Delete trade: ', trade);
+    this.tradeService.delete(trade).subscribe(result => {  });
+  }
 
 }

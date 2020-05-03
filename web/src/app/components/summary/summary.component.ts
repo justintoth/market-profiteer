@@ -20,18 +20,19 @@ export class SummaryComponent implements OnInit {
   ngOnInit(): void {
     // Listen for updates to trades.
     this.tradeService.tradesSubscription.subscribe((trades) => {
-      if (trades.length === 0)
-        console.warn('Summary Component > tradesSubscription > trades: ', trades.length);
-      // Get all stock positions.
-      this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
-        // Update summary.
-        this.tradesProfit = trades
-          .filter(x => !x.IsPurchase)
-          .reduce((sum, current) => sum + (current.SaleProfitLoss || 0), 0);
-        this.stockPositionsProfit = stockPositions
-          .reduce((sum, current) => sum + current.ProfitLoss, 0);
-        this.totalProfit = this.tradesProfit + this.stockPositionsProfit;
-      });
+      if (trades.length > 0) {
+        // Get all stock positions.
+        this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
+          // Update summary.
+          this.tradesProfit = trades
+            .filter(x => !x.IsPurchase)
+            .reduce((sum, current) => sum + (current.SaleProfitLoss || 0), 0);
+          this.stockPositionsProfit = stockPositions
+            .reduce((sum, current) => sum + current.ProfitLoss, 0);
+          this.totalProfit = this.tradesProfit + this.stockPositionsProfit;
+        });
+      } else
+        this.tradesProfit = this.stockPositionsProfit = this.totalProfit = 0;
     });
   }
 

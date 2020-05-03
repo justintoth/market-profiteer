@@ -18,14 +18,18 @@ export class StockPositionsComponent implements OnInit {
   ngOnInit(): void {
     // Listen for updates to trades.
     this.tradeService.tradesSubscription.subscribe((trades) => {
-      if (trades.length === 0)
-        console.warn('Stock Positions Component > tradesSubscription > trades: ', trades.length);
-      // Get all stock positions.
-      this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
-        this.stockPositions = stockPositions;
-      });
+      if (trades.length > 0) {
+        // Get all stock positions.
+        this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
+          this.stockPositions = stockPositions;
+        });
+      } else
+        this.stockPositions = [];
     });
-    
+    // Get all trades.
+    console.log('Stock Positions Component > Get all trades');
+    this.tradeService.getAll()
+        .subscribe(result => { });
   }
 
 }

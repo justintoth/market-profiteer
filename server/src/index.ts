@@ -7,7 +7,6 @@ const config = require('./environment.json')[process.env.NODE_ENV || 'developmen
 
 const app = express();
 const port = +process.env.PORT || 8000;
-const host = process.env.HOST || 'localhost';
 
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -29,7 +28,7 @@ app.post('/trades', saveTrade);
 app.post('/trades/all', saveAllTrades);
 app.delete('/trades/:tradeId', deleteTrade);
 
-app.listen(port, host, 34, err => {
+app.listen(port, err => {
   if (err) return console.error(err);
   return console.log(`Server is listening on ${port}`);
 });

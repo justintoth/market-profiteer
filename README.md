@@ -13,7 +13,6 @@ Read the README.md file in the `web` folder for more information on getting set 
 ## TODO's
 
 - Handle expired auth tokens
-- Fix 0 trades bug
 - Summary > Add additional metrics (e.g. profit/loss today / this month / this year?)
 - Trade History > Support paging as user scrolls
 
