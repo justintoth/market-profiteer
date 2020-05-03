@@ -1,0 +1,10 @@
+{
+  "development": {
+    "jwt_shared_secret": "market-profiteer-shared-secret",
+    "jwt_expires_in_hours": 4
+  }, 
+  "production": {
+    "jwt_shared_secret": "market-profiteer-shared-secret",
+    "jwt_expires_in_hours": 48
+  }
+}

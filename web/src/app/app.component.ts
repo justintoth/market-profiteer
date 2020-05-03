@@ -8,7 +8,7 @@ import { TradeService } from './services/trade.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'stock-marathoner';
+  title = 'market-profiteer';
 
   constructor(
     private tradeService: TradeService,

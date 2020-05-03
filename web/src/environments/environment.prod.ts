@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  apiHost: 'api.stockmarathoner.com',
-  apiUrl: 'http://api.stockmarathoner.com',
+  apiHost: 'api.marketprofiteer.com',
+  apiUrl: 'http://api.marketprofiteer.com',
+  stockPriceApiUrl: 'https://financialmodelingprep.com/api/v3/company/stock/list',
 };

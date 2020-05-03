@@ -3,7 +3,7 @@ import { Utils } from '../shared/utils';
 import { JsonStorage } from '../shared/json-storage';
 import { User } from './../models/user.model';
 const jwt = require('jsonwebtoken');
-const config = require('../../environment.json')[process.env.NODE_ENV || 'development'];
+const config = require('../environment.json')[process.env.NODE_ENV || 'development'];
 
 export const root = (_req: Request, res: Response) => {
   return res.send('The API is working 🤓');

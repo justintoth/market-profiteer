@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "stock-marathoner": {
+    "market-profiteer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/stock-marathoner",
+            "outputPath": "dist/market-profiteer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "stock-marathoner:build"
+            "browserTarget": "market-profiteer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "stock-marathoner:build:production"
+              "browserTarget": "market-profiteer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "stock-marathoner:build"
+            "browserTarget": "market-profiteer:build"
           }
         },
         "test": {
@@ -114,18 +114,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "stock-marathoner:serve"
+            "devServerTarget": "market-profiteer:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "stock-marathoner:serve:production"
+              "devServerTarget": "market-profiteer:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "stock-marathoner",
+  "defaultProject": "market-profiteer",
   "cli": {
     "analytics": "4a47746d-7ab7-4efd-be93-f8dc4e99271e"
   }

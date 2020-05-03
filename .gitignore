@@ -4,8 +4,10 @@
 ._*
 
 # Packages
-web/node_modules/*
 server/node_modules/*
+server/dist/*
+web/node_modules/*
+web/dist/*
 
 # Stores
 server/stores/*
