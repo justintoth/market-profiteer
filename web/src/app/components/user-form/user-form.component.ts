@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { TradeService } from 'src/app/services/trade.service';
+import { ClientStorage } from 'src/app/shared/client-storage';
 
 @Component({
   selector: 'app-user-form',
@@ -25,6 +26,7 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated = this.userService.isAuthenticated();
+    this.model.EmailAddress = ClientStorage.getEmailAddress();
   }
 
   onShowSigninForm() {

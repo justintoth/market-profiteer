@@ -1,10 +1,19 @@
 import { Trade } from '../models/trade.model';
 import { User } from '../models/user.model';
 
-const tradesKey: string = 'trades';
 const userKey: string = 'user';
+const emailAddressKey: string = 'email-address';
+const tradesKey: string = 'trades';
 
 export abstract class ClientStorage {
+
+  public static getEmailAddress(): string {
+    return localStorage.getItem(emailAddressKey);
+  }
+
+  public static saveEmailAddress(emailAddress: string) {
+    localStorage.setItem(emailAddressKey, emailAddress);
+  }
 
   public static getUser(): User {
     let json = localStorage.getItem(userKey);

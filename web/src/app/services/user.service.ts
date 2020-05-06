@@ -25,6 +25,7 @@ export class UserService {
           console.log('User Service > Saved user: ', result);
           // Save user to local storage.
           ClientStorage.saveUser(result);
+          ClientStorage.saveEmailAddress(result.EmailAddress);
         })
       );
   }
@@ -37,6 +38,7 @@ export class UserService {
           console.log('User Service > Authentication succeeded: ', result);
           // Save user to local storage.
           ClientStorage.saveUser(result);
+          ClientStorage.saveEmailAddress(result.EmailAddress);
           return true;
         })
       );

@@ -12,7 +12,9 @@ Read the README.md file in the `web` folder for more information on getting set 
 
 ## TODO's
 
+- Force redirect to www. so we don't run into local storage sharing issue
 - Handle expired auth tokens
+- Be able to add a short position (AKA sell short and then cover by buying)
 - Summary > Add additional metrics (e.g. profit/loss today / this month / this year?)
 - Trade History > Support paging as user scrolls
 
