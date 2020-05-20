@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   apiHost: 'localhost:8000',
   apiUrl: 'http://localhost:8000',
-  stockPriceApiUrl: 'https://financialmodelingprep.com/api/v3/company/stock/list',
+  stockPriceApiUrl: 'https://financialmodelingprep.com/api/v3/company/stock/list?apikey=85ca409ccf0c94957a43b7df5870370c',
 };
 
 /*
