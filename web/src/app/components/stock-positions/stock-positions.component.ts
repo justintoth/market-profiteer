@@ -11,6 +11,8 @@ import { TradeService } from 'src/app/services/trade.service';
 export class StockPositionsComponent implements OnInit {
 
   public stockPositions: StockPosition[] = [];
+  public totalBalance: number = 0;
+  public totalProfitLoss: number = 0;
 
   constructor(private tradeService: TradeService, private stockService: StockService) {
    }
@@ -22,6 +24,8 @@ export class StockPositionsComponent implements OnInit {
         // Get all stock positions.
         this.stockService.getAllPositions(trades).subscribe((stockPositions) => {
           this.stockPositions = stockPositions;
+          this.totalBalance = stockPositions.reduce((sum, current) => sum + (current.Balance || 0), 0);
+          this.totalProfitLoss = stockPositions.reduce((sum, current) => sum + (current.ProfitLoss || 0), 0);
         });
       } else
         this.stockPositions = [];

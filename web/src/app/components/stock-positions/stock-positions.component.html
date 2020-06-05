@@ -21,6 +21,13 @@
             <td class="{{ stockPosition.ProfitLoss >= 0 ? 'green' : 'red' }}">{{ stockPosition.ProfitLoss | currency }}</td>
         </tr>
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">Total:</td>
+            <td>{{ totalBalance | currency }}</td>
+            <td class="{{ totalProfitLoss >= 0 ? 'green' : 'red' }}">{{ totalProfitLoss | currency }}</td>
+        </tr>
+    </tfoot>
 </table>
 
 <p [hidden]="stockPositions && stockPositions.length > 0">You don't have any stock positions yet!</p>
