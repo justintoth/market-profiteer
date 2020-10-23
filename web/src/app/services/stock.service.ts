@@ -17,18 +17,16 @@ import { Utils } from '../shared/utils';
 })
 export class StockService {
 
-  // TODO: Find more up to date api...
   private stockPriceApiUrl = environment.stockPriceApiUrl;
+  private stockPriceApiRefreshInMinutes = environment.stockPriceApiRefreshInMinutes;
   public stockPriceRefreshDate: Moment;
   private stockPrices: StockPrices;
-  private refreshInterval;
-  private refreshIntervalMinutes: number = 1;
 
   constructor(private http: HttpClient, private tradeService: TradeService) { 
   }
 
   public enableAutoRefresh() {
-    this.refreshInterval = setInterval(() => {
+    setInterval(() => {
       // Check if stock market is open.
       if (!Utils.stockMarketIsOpen()) {
         console.warn('Stock Service > Stock market isn\'t open so no need to refresh stock positions');
@@ -40,7 +38,7 @@ export class StockService {
           console.warn('Stock Service > enableAutoRefresh > tradesSubscription > trades: ', trades.length);
         this.getAllPositions(trades).subscribe(stockPositions => { });
       });
-    }, this.refreshIntervalMinutes * 60 * 1000);
+    }, this.stockPriceApiRefreshInMinutes * 60 * 1000);
   }
 
   public getAllPositions(trades: Trade[]): Observable<StockPosition[]> {
@@ -105,9 +103,12 @@ export class StockService {
   }
 
   public getAllPrices(): Observable<StockPrices> {
-    let minutesSinceLastRefresh: number =  this.stockPriceRefreshDate ? 
-      moment.duration(moment().diff(this.stockPriceRefreshDate)).minutes() : 100;
-    if (minutesSinceLastRefresh > 1) {
+    let minutesSinceLastRefresh: number = this.stockPriceRefreshDate ? 
+      moment.duration(moment().diff(this.stockPriceRefreshDate)).minutes() : 
+      (this.stockPriceApiRefreshInMinutes + 1);
+    if (minutesSinceLastRefresh > this.stockPriceApiRefreshInMinutes) {
+      // Limited to 250 requests/day...
+      // TODO: This is getting called twice on load...
       return this.http.get<StockPrices>(this.stockPriceApiUrl)
         .pipe(
           tap(result => {
